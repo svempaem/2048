@@ -14,6 +14,13 @@ for (let i = 0; i < 16; i++) {
     mainBoard.innerHTML += '<div class="tile" id="tile' + (i + 1) + '"><p class="number" id="number' + (i + 1) + '"></p></div>';
 }
 
+window.addEventListener("keydown", function(e) {
+    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+        e.preventDefault();
+    }
+}, false);
+
+
 let score = 0;
 
 let board = [
