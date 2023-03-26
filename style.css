@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 3vw;
+    color: white;
+}
+
+.main-board {
+    width: 31vw;
+    height: 31vw;
+    margin: auto;
+    margin-top: 9vw;
+
+    padding: 1vw;
+    background-color: rgb(154, 62, 62);
+
+    contain: content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1vw;
+    border-radius: 2%;
+
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.33);
+}
+
+.tile {
+    width: 7vw;
+    height: 7vw;
+    background-color: rgb(110, 110, 110);
+    display: flex;
+    align-items: center;  
+    justify-content: center; 
+    box-shadow: none;
+}
+
+.pop-up {
+    text-align: center;
+    margin-top: 1vw;
+    display: none;
+}
+
+.pop-up > p {
+    color: black;
+}
+
+.reset-button {
+    background-color: rgb(154, 62, 62);
+    font-size: 20pt;
+
+    width: 15vw;
+    height: 4vw;
+    position: absolute;
+    right: 17vw;
+    top: 38vw;
+    border: none;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.33);
+}
+
+.main-title {
+    color: black;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12vw;
+    text-align: center;
+
+    height: 4vw;
+}
+
+.mast-head {
+    color: rgba(0, 0, 0, 0.471);
+    font-size: 1vw;
+    text-align: center;
+    margin-top: 4.5vw;
+}
+
+.score,.high-score {
+    font-size: 2vw;
+    color: black;
+    position: absolute;
+    left: 68vw;
+}
+
+.score {
+    top: 14vw;
+}
+
+.high-score {
+    top: 16vw;
+}
