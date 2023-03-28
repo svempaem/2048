@@ -15,7 +15,6 @@ window.addEventListener("keydown", function(e) {
     }
 }, false);
 
-
 for (let i = 0; i < 16; i++) {
     mainBoard.innerHTML += '<div class="tile" id="tile' + (i + 1) + '"><p class="number" id="number' + (i + 1) + '"></p></div>';
 }
@@ -28,6 +27,9 @@ let board = [
     0,0,0,0,
     0,0,0,0
 ];
+
+let numbers = [number1,number2,number3,number4,number5,number6,number7,number8,number9,number10,number11,number12,number13,number14,number15,number16];
+let tiles = [tile1,tile2,tile3,tile4,tile5,tile6,tile7,tile8,tile9,tile10,tile11,tile12,tile13,tile14,tile15,tile16];
 
 let tileRoller;
 let tileToSpawnOn;
@@ -58,25 +60,9 @@ function checkIfZero(boardNumber,numberNumber,tileNumber) {
 
 
 function checkAllZero() {
-    checkIfZero(0,number1,tile1);
-    checkIfZero(1,number2,tile2);
-    checkIfZero(2,number3,tile3);
-    checkIfZero(3,number4,tile4);
-    
-    checkIfZero(4,number5,tile5);
-    checkIfZero(5,number6,tile6);
-    checkIfZero(6,number7,tile7);
-    checkIfZero(7,number8,tile8);
-    
-    checkIfZero(8,number9,tile9);
-    checkIfZero(9,number10,tile10);
-    checkIfZero(10,number11,tile11);
-    checkIfZero(11,number12,tile12);
-    
-    checkIfZero(12,number13,tile13);
-    checkIfZero(13,number14,tile14);
-    checkIfZero(14,number15,tile15);
-    checkIfZero(15,number16,tile16);
+    for (let i = 0; i < 16; i++) {
+        checkIfZero(i, numbers[i], tiles[i]);
+    }
 }
 
 function whichTile() {
@@ -92,10 +78,6 @@ function whichTileNumber() {
         return 2;
     }
 }
-
-// for (let i = 0; i < 60; i++) {
-//     console.log(whichTileNumber());
-// }
 
 function spawnTile() {
     tileToSpawnOn = whichTile();
@@ -142,16 +124,16 @@ function checkColumn3(column3Tile,column3Check,direction,whichRow) {
             board[column3Check] = 0;
             if (direction === 'right') {
                 if (whichRow === '1') {
-                    checkColumn4(3,2,'right','1');
+                    checkColumn4(3,2);
                 }
                 else if (whichRow === '2') {
-                    checkColumn4(7,6,'right','2');
+                    checkColumn4(7,6);
                 }
                 else if (whichRow === '3') {
-                    checkColumn4(11,10,'right','3');
+                    checkColumn4(11,10);
                 }
                 else if (whichRow === '4') {
-                    checkColumn4(15,14,'right','4');
+                    checkColumn4(15,14);
                 }
             }
             else if (direction === 'left') {
@@ -170,16 +152,16 @@ function checkColumn3(column3Tile,column3Check,direction,whichRow) {
             }
             else if (direction === 'down') {
                 if (whichRow === '1') {
-                    checkColumn4(12,8,'down','1');
+                    checkColumn4(12,8);
                 }
                 else if (whichRow === '2') {
-                    checkColumn4(13,9,'down','2');
+                    checkColumn4(13,9);
                 }
                 else if (whichRow === '3') {
-                    checkColumn4(14,10,'down','3');
+                    checkColumn4(14,10);
                 }
                 else if (whichRow === '4') {
-                    checkColumn4(15,11,'down','4');
+                    checkColumn4(15,11);
                 }
             }
             else if (direction === 'up') {
@@ -229,16 +211,16 @@ function checkColumn2(column2Tile,column2Check,direction,whichRow) {
             }
             else if (direction === 'left') {
                 if (whichRow === '1') {
-                    checkColumn1(0,1,'left','1');
+                    checkColumn1(0,1);
                 }
                 else if (whichRow === '2') {
-                    checkColumn1(4,5,'left','2');
+                    checkColumn1(4,5);
                 }
                 else if (whichRow === '3') {
-                    checkColumn1(8,9,'left','3');
+                    checkColumn1(8,9);
                 }
                 else if (whichRow === '4') {
-                    checkColumn1(12,13,'left','4');
+                    checkColumn1(12,13);
                 }
             }
             else if (direction === 'down') {
@@ -257,16 +239,16 @@ function checkColumn2(column2Tile,column2Check,direction,whichRow) {
             }
             else if (direction === 'up') {
                 if (whichRow === '1') {
-                    checkColumn1(0,4,'up','1');
+                    checkColumn1(0,4);
                 }
                 else if (whichRow === '2') {
-                    checkColumn1(1,5,'up','2');
+                    checkColumn1(1,5);
                 }
                 else if (whichRow === '3') {
-                    checkColumn1(2,6,'up','3');
+                    checkColumn1(2,6);
                 }
                 else if (whichRow === '4') {
-                    checkColumn1(3,7,'up','4');
+                    checkColumn1(3,7);
                 }
             }
             tileHasSpawned = true;
@@ -281,7 +263,7 @@ function checkColumn2(column2Tile,column2Check,direction,whichRow) {
     }  
 }
 
-function checkColumn1(column1Tile,column1Check,direction,whichRow) {
+function checkColumn1(column1Tile,column1Check) {
     if (board[column1Check] !== 0) {
         if (board[column1Tile] === 0) {
             board[column1Tile] = board[column1Check];
@@ -299,132 +281,127 @@ function checkColumn1(column1Tile,column1Check,direction,whichRow) {
     }  
 }
 
+function checkForTileSpawn() {
+    if (tileHasSpawned === true) {
+        spawnTile();
+        tileHasSpawned = false;
+    }
+}
+
 function arrowRight() {
-    checkColumn4(3,2,'right');
+    checkColumn4(3,2);
     checkColumn3(2,1,'right','1');
     checkColumn2(1,0,'right','1');
     has2Merged = false;
     has3Merged = false;
     has4Merged = false;
-    checkColumn4(7,6,'right');
+    checkColumn4(7,6);
     checkColumn3(6,5,'right','2');
     checkColumn2(5,4,'right','2');
     has2Merged = false;
     has3Merged = false;
     has4Merged = false;
-    checkColumn4(11,10,'right');
+    checkColumn4(11,10);
     checkColumn3(10,9,'right','3');
     checkColumn2(9,8,'right','3');
     has2Merged = false;
     has3Merged = false;
     has4Merged = false;
-    checkColumn4(15,14,'right');
+    checkColumn4(15,14);
     checkColumn3(14,13,'right','4');
     checkColumn2(13,12,'right','4');
     has2Merged = false;
     has3Merged = false;
     has4Merged = false;
 
-    if (tileHasSpawned === true) {
-        spawnTile();
-        tileHasSpawned = false;
-    }
+    checkForTileSpawn();
 }
 
 function arrowLeft() {
-    checkColumn1(0,1,'left');
+    checkColumn1(0,1);
     checkColumn2(1,2,'left','1');
     checkColumn3(2,3,'left','1');
     has1Merged = false;
     has2Merged = false;
     has3Merged = false;
-    checkColumn1(4,5,'left');
+    checkColumn1(4,5);
     checkColumn2(5,6,'left','2');
     checkColumn3(6,7,'left','2');
     has1Merged = false;
     has2Merged = false;
     has3Merged = false;
-    checkColumn1(8,9,'left');
+    checkColumn1(8,9);
     checkColumn2(9,10,'left','3');
     checkColumn3(10,11,'left','3');
     has1Merged = false;
     has2Merged = false;
     has3Merged = false;
-    checkColumn1(12,13,'left');
+    checkColumn1(12,13);
     checkColumn2(13,14,'left','4');
     checkColumn3(14,15,'left','4');
     has1Merged = false;
     has2Merged = false;
     has3Merged = false;
 
-    if (tileHasSpawned === true) {
-        spawnTile();
-        tileHasSpawned = false;
-    }
+    checkForTileSpawn();
 }
 
 function arrowDown() {
-    checkColumn4(12,8,'down');
+    checkColumn4(12,8);
     checkColumn3(8,4,'down','1');
     checkColumn2(4,0,'down','1');
     has2Merged = false;
     has3Merged = false;
     has4Merged = false;
-    checkColumn4(13,9,'down');
+    checkColumn4(13,9);
     checkColumn3(9,5,'down','2');
     checkColumn2(5,1,'down','2');
     has2Merged = false;
     has3Merged = false;
     has4Merged = false;
-    checkColumn4(14,10,'down');
+    checkColumn4(14,10);
     checkColumn3(10,6,'down','3');
     checkColumn2(6,2,'down','3');
     has2Merged = false;
     has3Merged = false;
     has4Merged = false;
-    checkColumn4(15,11,'down');
+    checkColumn4(15,11);
     checkColumn3(11,7,'down','4');
     checkColumn2(7,3,'down','4');
     has2Merged = false;
     has3Merged = false;
     has4Merged = false;
 
-    if (tileHasSpawned === true) {
-        spawnTile();
-        tileHasSpawned = false;
-    }
+    checkForTileSpawn();
 }
 
 function arrowUp() {
-    checkColumn1(0,4,'up');
+    checkColumn1(0,4);
     checkColumn2(4,8,'up','1');
     checkColumn3(8,12,'up','1');
     has1Merged = false;
     has2Merged = false;
     has3Merged = false;
-    checkColumn1(1,5,'up');
+    checkColumn1(1,5);
     checkColumn2(5,9,'up','2');
     checkColumn3(9,13,'up','2');
     has1Merged = false;
     has2Merged = false;
     has3Merged = false;
-    checkColumn1(2,6,'up');
+    checkColumn1(2,6);
     checkColumn2(6,10,'up','3');
     checkColumn3(10,14,'up','3');
     has1Merged = false;
     has2Merged = false;
     has3Merged = false;
-    checkColumn1(3,7,'up');
+    checkColumn1(3,7);
     checkColumn2(7,11,'up','4');
     checkColumn3(11,15,'up','4');
     has1Merged = false;
     has2Merged = false;
     has3Merged = false;
 
-    if (tileHasSpawned === true) {
-        spawnTile();
-        tileHasSpawned = false;
-    }
+    checkForTileSpawn();
 }
 
 function resetGame() {
@@ -464,7 +441,6 @@ function updateHighScore() {
     }
     highScoreText.innerText = 'High Score: ' + localStorage.getItem("highScore");
 }
-console.log(localStorage.getItem("highScore"))
 
 document.onkeydown = (e) => {
     e = e || window.event;
